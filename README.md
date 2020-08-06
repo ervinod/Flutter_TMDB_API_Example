@@ -12,9 +12,7 @@ A few resources to get you started if this is your first Flutter project:
 
 # Application Screenshots(Android)
 
-<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_1.jpg" width="300">
-<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_2.jpg" width="300">
-<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_3.jpg" width="300">
+<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_1.jpg" width="300"><img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_2.jpg" width="300"><img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_3.jpg" width="300">
 
 
 For help getting started with Flutter, view our
