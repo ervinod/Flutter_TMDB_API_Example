@@ -4,11 +4,14 @@
 This project demostrates use of TMDB movie API
 .
 
-A few resources to get you started if this is your first Flutter project:
+Following components are used in this Flutter project:
 
 - [BLoC Patter]
 - [Provider]
 - [TMDB API]
+- [Grid View]
+- [List View]
+- [SilverAppBar]
 
 # Application Screenshots(Android)
 
