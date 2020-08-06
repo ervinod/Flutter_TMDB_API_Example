@@ -20,7 +20,7 @@ class MovieListState extends State<SearchMovieList> {
   @override
   void initState() {
     super.initState();
-      bloc.searchAllMovies(widget.query);
+      bloc.searchAllMovies(context, widget.query);
   }
 
   @override

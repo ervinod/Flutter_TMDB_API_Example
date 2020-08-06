@@ -1,5 +1,8 @@
 import 'package:assesment_task/models/movie_model.dart';
 import 'package:assesment_task/network/repository.dart';
+import 'package:assesment_task/util/Constants.dart';
+import 'package:assesment_task/util/Helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SearchMoviesBloc {
@@ -14,9 +17,15 @@ class SearchMoviesBloc {
   Stream<MovieModel> get allMovies => _moviesFetcher.stream;
 
   //Fetching all movie list with entered keyword
-  searchAllMovies(String query) async {
-    MovieModel itemModel = await _repository.searchMoviesList(query);
-    _moviesFetcher.sink.add(itemModel); 
+  searchAllMovies(BuildContext context, String query) async {
+
+    bool isNetwork = await Helper.isNetworAvailable();
+    if (isNetwork) {
+      MovieModel itemModel = await _repository.searchMoviesList(query);
+      _moviesFetcher.sink.add(itemModel);
+    }else{
+      Helper.showLongToast(context, Constants.NO_INTERNET_MSG);
+    }
   }
 
   //clear stream data

@@ -2,6 +2,9 @@
 import 'package:assesment_task/bloc/validation.dart';
 import 'package:assesment_task/models/movie_model.dart';
 import 'package:assesment_task/network/repository.dart';
+import 'package:assesment_task/util/Constants.dart';
+import 'package:assesment_task/util/Helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MoviesBloc extends Object with Validation{
@@ -23,9 +26,14 @@ class MoviesBloc extends Object with Validation{
   Stream<MovieModel> get allMovies => _moviesFetcher.stream;
 
   //Fetching all movie list
-  fetchAllMovies() async {
-    MovieModel itemModel = await _repository.fetchMoviesList();
-    _moviesFetcher.sink.add(itemModel); 
+  fetchAllMovies(BuildContext context) async {
+    bool isNetwork = await Helper.isNetworAvailable();
+    if (isNetwork) {
+      MovieModel itemModel = await _repository.fetchMoviesList();
+      _moviesFetcher.sink.add(itemModel);
+    }else{
+      Helper.showLongToast(context, Constants.NO_INTERNET_MSG);
+    }
   }
 
   clearBloc() {

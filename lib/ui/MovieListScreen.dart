@@ -24,7 +24,7 @@ class MovieListScreenState extends State<MovieListScreen> {
   void initState() {
     super.initState();
     //getting all movie list from api
-    bloc.fetchAllMovies();
+    bloc.fetchAllMovies(context);
   }
 
   @override
