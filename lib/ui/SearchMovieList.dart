@@ -8,7 +8,7 @@ import 'MovieDetailScreen.dart';
 class SearchMovieList extends StatefulWidget {
 
   SearchMovieList({this.query});
-  final String query;
+  final String quer;
 
   @override
   MovieListState createState() {
