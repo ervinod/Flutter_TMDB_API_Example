@@ -3,7 +3,6 @@ import 'package:assesment_task/models/movie_model.dart';
 import 'package:assesment_task/util/Constants.dart';
 import 'package:assesment_task/util/Helper.dart';
 import 'package:flutter/material.dart';
-
 import 'MovieDetailScreen.dart';
 import 'SearchMovieList.dart';
 
@@ -17,6 +16,7 @@ class MovieListScreen extends StatefulWidget {
 
 class MovieListScreenState extends State<MovieListScreen> {
 
+  DateTime currentBackPressTime;
   //declaring node to manage texfield focus
   final FocusNode _searchFocus = FocusNode();
 
@@ -40,27 +40,29 @@ class MovieListScreenState extends State<MovieListScreen> {
     return SafeArea(
       top: true,
       bottom: true,
-      child: Scaffold(
-        appBar: MyCustomAppBarWidget(
-          _searchFocus,
-          height: 120,
+      child: WillPopScope(
+        onWillPop: onBackPressed,
+        child: Scaffold(
+          appBar: MyCustomAppBarWidget(
+            _searchFocus,
+            height: 120,
 
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: StreamBuilder(
-            stream: bloc.allMovies,
-            builder: ((context, snapshot) {
-              if (snapshot.hasData) {
-                return buildList(snapshot);
-              } else if (snapshot.hasError) {
-                print("Inside hasError");
-                return Text(snapshot.error.toString());
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: StreamBuilder(
+              stream: bloc.allMovies,
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  return buildList(snapshot);
+                } else if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+            ),
           ),
         ),
       ),
@@ -86,9 +88,10 @@ class MovieListScreenState extends State<MovieListScreen> {
             enableFeedback: true,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.network(
-                'https://image.tmdb.org/t/p/w185${snapshot.data.results[index]
-                    .poster_path}',
+              child: FadeInImage.assetNetwork(
+              placeholder: 'assets/placeholder.png',
+                image:Constants.IMAGE_PREFIX_W185+"${snapshot.data.results[index]
+                    .poster_path}",
                 fit: BoxFit.cover,
               ),
             ),
@@ -108,6 +111,18 @@ class MovieListScreenState extends State<MovieListScreen> {
         voteAverage: data.results[index].vote_average.toString(),
         movieId: data.results[index].id.toDouble())));
 
+  }
+
+  //function to check if back button pressed and show exit app message
+  Future<bool> onBackPressed() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Helper.showShortToast(context, Constants.MSG_EXIT_APP);
+      return Future.value(false);
+    }
+    return Future.value(true);
   }
 
 }
@@ -162,7 +177,7 @@ class MyCustomAppBarWidget extends StatelessWidget implements PreferredSizeWidge
                           if(snapshot.hasData){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchMovieList(query: snapshot.data)));
                           }else{
-                            Helper.showShortToast(context, "Please enter movie name");
+                            Helper.showShortToast(context, Constants.SEARCH_ERROR_MSG);
                           }
                         },
                       ),
@@ -179,4 +194,6 @@ class MyCustomAppBarWidget extends StatelessWidget implements PreferredSizeWidge
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
+
+
 

@@ -1,3 +1,4 @@
+import 'package:assesment_task/util/Constants.dart';
 import 'package:flutter/material.dart';
 
 
@@ -55,7 +56,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 elevation: 0.0,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Image.network(
-                  "https://image.tmdb.org/t/p/w500${widget.posterUrl}",
+                  Constants.IMAGE_PREFIX_W500+"${widget.posterUrl}",
                   fit: BoxFit.cover,
                 )),
               ),

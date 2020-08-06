@@ -1,5 +1,6 @@
 import 'package:assesment_task/bloc/search_movies_bloc.dart';
 import 'package:assesment_task/models/movie_model.dart';
+import 'package:assesment_task/util/Constants.dart';
 import 'package:flutter/material.dart';
 
 import 'MovieDetailScreen.dart';
@@ -37,7 +38,7 @@ class MovieListState extends State<SearchMovieList> {
       bottom: true,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Search Result'),
+          title: Text(Constants.SEARCH_RESULT),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -47,7 +48,6 @@ class MovieListState extends State<SearchMovieList> {
               if (snapshot.hasData) {
                 return createListViewUI(snapshot);
               } else if (snapshot.hasError) {
-                print("Inside hasError");
                 return Text(snapshot.error.toString());
               }
               return Center(
@@ -78,7 +78,7 @@ class MovieListState extends State<SearchMovieList> {
   Widget createListViewUI(AsyncSnapshot<MovieModel> snapshot) {
     if(snapshot.data.results.length==0){
       //check if no movies found and return message
-      return Center(child: Text("Oops...No Movie Found", style: TextStyle(height:1.5, fontSize: 18, color: Colors.black45,),));
+      return Center(child: Text(Constants.NOT_FOUND_MSG, style: TextStyle(height:1.5, fontSize: 18, color: Colors.black45,),));
     }else{
       return ListView.builder(
           padding: EdgeInsets.only(bottom: 10),
@@ -111,8 +111,9 @@ class MovieListState extends State<SearchMovieList> {
               child: ClipRRect(
                 // Using ClipRRect for making round corners
                 borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w185${item.poster_path}',
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/placeholder.png',
+                    image:Constants.IMAGE_PREFIX_W185+"${item.poster_path}",
                     fit: BoxFit.cover,
                   ),
               ),
