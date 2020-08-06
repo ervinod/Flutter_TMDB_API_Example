@@ -1,15 +1,23 @@
-# assesment_task
+# Assesment Task
 
-Assesment Task
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project demostrates use of TMDB movie API.
 
 A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [BLoc Patter]
+- [Provider]
+- [TMDB API]
+
+# Application Screenshots(Android)
+Custom BottomAppBar example along with code snippet that shows how to fetch contacts from contact list and removing duplicate contacts.
+
+<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_1.jpg" width="300">
+<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_2.jpg" width="300">
+<img src="https://github.com/ervinod/assesment_task/blob/master/Screenshot_3.jpg" width="300">
+
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
