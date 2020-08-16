@@ -1,8 +1,7 @@
-# Assesment Task
+# Flutter TMDB API Example
 
 
-This project demostrates use of TMDB movie API
-.
+This project demostrates use of TMDB movie API implementation using BLoC architecture pattern and will help to understand use of Streams in flutter.
 
 Following components are used in this Flutter project:
 
